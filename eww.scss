@@ -1,0 +1,130 @@
+$white: #BAC2DE;
+$black: #45475A;
+$black2: #585B70;
+$red: #F38BA8;
+$green: #A6E3A1;
+$yellow: #F9E2AF;
+$blue: #89B4FA;
+$magenta: #F5C2E7;
+$cyan: #94E2D5;
+
+$magenta3: #e6aaee;
+$purple: #b0b0e8;
+
+$text: $white;
+$mod-bg: #505060;
+$trough: #464666;
+$bg: rgba(#1e1e2e, .7);
+$hover-bg: $black;
+
+* {
+  all: unset;
+}
+
+.bar {
+  margin-top: 10px;
+  color: $text;
+  font-size: 20px;
+  font-family: "Symbols Nerd Font", "Comic Code Ligatures";
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.mod {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.metric scale trough highlight {
+  background-color: $magenta;
+  border-radius: 10px;
+}
+
+.metric scale trough {
+  background-color: $trough;
+  border-radius: 50px;
+  min-height: 6px;
+  min-width: 50px;
+  margin-left: 10px;
+}
+
+.workspaces button:hover {
+  background-color: $hover-bg;
+}
+
+.workspaces {
+  // un... un bro momento
+  .id1 {
+    font-size: 15px;
+  }
+  .id2 {
+    font-size: 16px;
+  }
+  .id3 {
+    font-size: 15px;
+  }
+  .id6 {
+    font-size: 13px;
+  }
+  .id7 {
+    font-size: 14px;
+  }
+  .id8 {
+    font-size: 15px;
+  }
+
+  button {
+    padding: 0 7px;
+    margin: 0 3px;
+    border-radius: 50%;
+    color: $text;
+    border: 2px solid;
+    border-color: $black2;
+  }
+  button.focused {
+    border-color: $magenta3;
+    color: $purple;
+  }
+  button.urgent {
+    background-color: $magenta;
+    color: $black;
+  }
+}
+
+.circle {
+  font-size: 14px;
+  margin: 8px;
+}
+
+.red {
+  color: $red;
+}
+
+.green {
+  color: $green;
+}
+
+.yellow {
+  color: $yellow;
+}
+
+.blue {
+  color: $blue;
+}
+
+.magenta {
+  color: $magenta;
+}
+
+.cyan {
+  color: $cyan;
+}
+
+.purple {
+  color: $purple;
+}
+
+.circle-bar {
+  background-color: $bg;
+}
+

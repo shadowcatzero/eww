@@ -1,0 +1,24 @@
+(include "bar/widget.yuck")
+
+(include "bar/widgets/sys.yuck")
+(include "bar/widgets/wss.yuck")
+(include "bar/widgets/info.yuck")
+
+(defwidget bar [monitor]
+  (centerbox :class "bar" :orientation "h"
+    (bar-left)
+    (bar-center :monitor monitor)
+    (bar-right)))
+
+(defwidget bar-left []
+  (box :class "bar-left" :space-evenly false :halign "start"
+    (bat) (cpu) (temp) (mem) (disk)))
+
+(defwidget bar-center [monitor]
+  (box :class "bar-center" :space-evenly false
+    (workspaces :monitor monitor)))
+
+(defwidget bar-right []
+  (box :class "bar-right" :space-evenly false :halign "end"
+    (brightness) (vol) (net) (date) (time)))
+

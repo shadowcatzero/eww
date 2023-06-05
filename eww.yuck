@@ -1,0 +1,21 @@
+(include "bar/bar.yuck")
+
+(defwindow bar-eDP
+  :monitor 0
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "30px"
+                      :anchor "top center")
+  (bar :monitor 0))
+
+(defwindow bar-HDMI
+  :monitor 1
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "30px"
+                      :anchor "top center")
+  (bar :monitor 1))

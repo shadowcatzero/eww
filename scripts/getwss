@@ -1,0 +1,118 @@
+#!/bin/env python3
+import os
+import sys
+import subprocess
+import json
+import socket
+from dataclasses import dataclass
+
+NAME = [
+    "?",
+    "",
+    "󰄛",
+    "󰴈",
+    "♪",
+    "",
+    "",
+    "󰑴",
+    "",
+]
+
+@dataclass
+class State:
+    wss: dict
+    mname: str
+    focused: bool
+    prev_active: int
+
+def handle(state: State, event: str, data: str = None):
+    wss = state.wss
+    changed = True
+
+    if event == "focusedmon":
+        state.focused = data[:-2] == state.mname
+    if not state.focused:
+        return
+
+    if event == "workspace":
+        wid = int(data)
+        if state.prev_active in wss.keys():
+            wss[state.prev_active]['focused'] = False
+        wss[wid]['focused'] = True
+        state.prev_active = wid
+        return output(state)
+    if event == "createworkspace":
+        wss[int(data)] = new_ws(int(data), True, False)
+        state.wss = dict(sorted(wss.items()))
+        return output(state)
+    if event == "destroyworkspace":
+        del wss[int(data)]
+        return output(state)
+
+def output(state: State):
+    print(json.dumps(list(state.wss.values())), flush=True)
+
+def main(mid: str):
+    state = get_state(mid)
+    output(state)
+
+    isig = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
+    client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    client.connect(f"/tmp/hypr/{isig}/.socket2.sock")
+    while True:
+        r = client.recv(1024)
+        if not r:
+            break
+        msgs = r.decode().strip().split("\n")
+        for msg in msgs:
+            parts = msg.split(">>")
+            handle(state, *parts)
+
+def get_state(mid: str):
+    mid = int(mid)
+    res = subprocess.run(
+            ["hyprctl", "monitors", "-j"],
+            capture_output=True
+    )
+    raw_mons = json.loads(res.stdout)
+    res = subprocess.run(
+            ["hyprctl", "workspaces", "-j"],
+            capture_output=True
+    )
+    raw_wss = json.loads(res.stdout)
+
+    mname: str = None
+    activews: int = None
+    focused: bool = None
+    for m in raw_mons:
+        if m['id'] == mid:
+            activews = int(m['activeWorkspace']['id'])
+            mname = m['name']
+            focused = m['focused']
+            break
+    if mname is None:
+        print("Error: monitor not found")
+        sys.exit(1)
+
+    wss = dict()
+    for ws in raw_wss:
+        if ws['monitor'] == mname:
+            wid = int(ws['id'])
+            wss[wid] = new_ws(wid, wid == activews, False)
+    wss = dict(sorted(wss.items()))
+    return State(wss, mname, focused, activews)
+
+def new_ws(wid, focused, urgent):
+    return {
+            'id': wid,
+            'name': NAME[wid],
+            'focused': focused,
+            'urgent': urgent
+    }
+
+if __name__ == '__main__':
+    try:
+        main(*sys.argv[1:])
+    except KeyboardInterrupt:
+        pass
+

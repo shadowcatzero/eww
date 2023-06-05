@@ -1,0 +1,25 @@
+(defwidget cpu []
+  (circle :value {EWW_CPU.avg}
+          :icon ""
+          :class "cyan"))
+
+(defwidget temp []
+  (circle :value {EWW_TEMPS.CORETEMP_PACKAGE_ID_0}
+          :icon ""
+          :class "magenta"))
+
+(defwidget mem []
+  (circle :value {EWW_RAM.used_mem_perc}
+          :icon ""
+          :class "yellow"))
+
+(defwidget disk []
+  (circle :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+          :icon ""
+          :class "red"))
+
+(defwidget bat []
+  (circle :value {EWW_BATTERY.BAT0.capacity}
+          :icon "⏻"
+          :class "green"))
+

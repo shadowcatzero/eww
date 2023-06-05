@@ -1,0 +1,62 @@
+(defvar eww "eww")
+
+(defwidget metric [label value min max onchange]
+  (box :orientation "h"
+       :class "metric mod"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min min
+           :max max
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+(defwidget hover-metric [icon value ?class revealname reveal onchange]
+  (eventbox :onhover "${eww} update ${revealname}=true"
+            :onhoverlost "${eww} update ${revealname}=false"
+    (box :orientation "h"
+         :class "metric mod"
+         :space-evenly false
+      (box :class {class ?: ""} {icon})
+      (revealer :transition "slideleft"
+                :reveal reveal
+                :duration "300ms"
+        (scale :min 0
+               :max 100
+               :value value
+               :onchange onchange)))))
+
+(defwidget hover-text [icon value ?class revealname reveal]
+  (eventbox :onhover "${eww} update ${revealname}=true"
+            :onhoverlost "${eww} update ${revealname}=false"
+    (box :orientation "h"
+         :class "metric mod"
+         :space-evenly false
+      (box :class {class ?: ""} {icon})
+      (revealer :transition "slideleft"
+                :reveal net_reveal
+                :duration "300ms"
+        (label :text {value}
+               :class "purple")))))
+
+(defwidget status [label poll]
+  (box :orientation "h"
+       :class "metric mod"
+       :space-evenly false
+    (box :class "label" label)
+    (text :poll poll)))
+
+(defwidget text [poll]
+  (box :class "text mod"
+    poll))
+
+(defwidget circle [value ?icon class]
+  (box :class "mod"
+    (circular-progress :value value
+                       :width 30
+                       :class "circle-bar ${class}"
+                       :thickness 4
+                       :start-at 75
+      (label :text {icon ?: ""}
+             :class "circle ${class}"))))
+

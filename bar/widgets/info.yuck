@@ -1,0 +1,38 @@
+(defvar vol_reveal false)
+(defvar bright_reveal false)
+(defvar net_reveal false)
+
+(defpoll vol :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}'")
+(defwidget vol []
+  (hover-metric :icon {vol < 33 ? "" : vol < 66 ? "" : "󰕾"}
+                :value vol
+                :class "green"
+                :revealname "vol_reveal"
+                :reveal vol_reveal
+                :onchange "wpctl set-volume @DEFAULT_SINK@ {}% && eww update vol={}"))
+
+(defpoll bright :interval "10s" "light")
+(defwidget brightness []
+  (hover-metric :icon ""
+                :value bright
+                :class "yellow"
+                :revealname "bright_reveal"
+                :reveal bright_reveal
+                :onchange "light -S {}%"))
+
+(defpoll net :interval "2s" "iw dev wlan0 link | awk 'NR==2 {print $2}'")
+(defwidget net []
+  (hover-text :icon " "
+              :value net
+              :class "cyan"
+              :revealname "net_reveal"
+              :reveal net_reveal))
+
+(defpoll time :interval "1s"  "date '+%H:%M:%S'")
+(defwidget time []
+  (text :poll time))
+
+(defpoll date :interval "10s"  "date '+%y-%m-%d'")
+(defwidget date []
+  (text :poll date))
+
