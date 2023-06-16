@@ -38,7 +38,8 @@ def handle(state: State, event: str, data: str = None):
         wid = int(data)
         if state.prev_active in wss.keys():
             wss[state.prev_active]['focused'] = False
-        wss[wid]['focused'] = True
+        if wid in wss.keys():
+            wss[wid]['focused'] = True
         state.prev_active = wid
         return output(state)
     if event == "createworkspace":
@@ -46,7 +47,8 @@ def handle(state: State, event: str, data: str = None):
         state.wss = dict(sorted(wss.items()))
         return output(state)
     if event == "destroyworkspace":
-        del wss[int(data)]
+        if int(data) in wss:
+            del wss[int(data)]
         return output(state)
 
 def output(state: State):
@@ -91,7 +93,7 @@ def get_state(mid: str):
             focused = m['focused']
             break
     if mname is None:
-        print("Error: monitor not found")
+        print("Error: monitor not found", file=sys.stderr)
         sys.exit(1)
 
     wss = dict()

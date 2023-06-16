@@ -1,7 +1,7 @@
 ;; (deflisten wslist0
-;;   "scripts/getwss eDP-1")
+;;   "scripts/getwsss eDP-1")
 ;; (deflisten wslist1
-;;   "scripts/getwss DP-")
+;;   "scripts/getwsss DP-")
 (deflisten wslist0
   "scripts/getwss 0")
 (deflisten wslist1

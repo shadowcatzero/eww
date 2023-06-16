@@ -18,7 +18,7 @@
          :class "metric mod"
          :space-evenly false
       (box :class {class ?: ""} {icon})
-      (revealer :transition "slideleft"
+      (revealer :transition "slideright"
                 :reveal reveal
                 :duration "300ms"
         (scale :min 0
@@ -33,7 +33,7 @@
          :class "metric mod"
          :space-evenly false
       (box :class {class ?: ""} {icon})
-      (revealer :transition "slideleft"
+      (revealer :transition "slideright"
                 :reveal net_reveal
                 :duration "300ms"
         (label :text {value}

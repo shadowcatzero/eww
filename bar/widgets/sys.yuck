@@ -18,8 +18,15 @@
           :icon ""
           :class "red"))
 
+(defpoll bat_stat :interval "30s" "cat /")
 (defwidget bat []
+  (box
   (circle :value {EWW_BATTERY.BAT0.capacity}
-          :icon "⏻"
-          :class "green"))
+          ;; :icon "⏻"
+          :icon {
+            EWW_BATTERY.BAT0.status == "Charging" ? "󱐋"
+            : EWW_BATTERY.BAT0.status == "Not charging" ? ""
+            : "󰁹"
+          }
+          :class "green")))
 
