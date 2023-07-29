@@ -1,21 +1,21 @@
 (defwidget cpu []
   (circle :value {EWW_CPU.avg}
           :icon ""
-          :class "cyan"))
+          :class "blue"))
 
 (defwidget temp []
   (circle :value {EWW_TEMPS.CORETEMP_PACKAGE_ID_0}
           :icon ""
-          :class "magenta"))
+          :class "purple"))
 
 (defwidget mem []
   (circle :value {EWW_RAM.used_mem_perc}
           :icon ""
-          :class "yellow"))
+          :class "magenta"))
 
 (defwidget disk []
-  (circle :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-          :icon ""
+  (circle :value "${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}"
+          :icon ""
           :class "red"))
 
 (defpoll bat_stat :interval "30s" "cat /")
@@ -24,9 +24,9 @@
   (circle :value {EWW_BATTERY.BAT0.capacity}
           ;; :icon "⏻"
           :icon {
-            EWW_BATTERY.BAT0.status == "Charging" ? "󱐋"
+            EWW_BATTERY.BAT0.status == "Charging" ? "󰂄"
             : EWW_BATTERY.BAT0.status == "Not charging" ? ""
-            : "󰁹"
+            : EWW_BATTERY.BAT0.capacity < 15 ? "󰂃" : "󰁹"
           }
-          :class "green")))
+          :class "cyan")))
 

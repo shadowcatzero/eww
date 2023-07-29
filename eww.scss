@@ -9,30 +9,39 @@ $magenta: #F5C2E7;
 $cyan: #94E2D5;
 
 $magenta3: #e6aaee;
+$black3: #686B80;
 $purple: #b0b0e8;
 
 $text: $white;
 $mod-bg: #505060;
 $trough: #464666;
-$bg: rgba(#1e1e2e, .7);
+$bg: #2e2e3e;
 $hover-bg: $black;
+
+$bg-darken: 40%;
+$bg-desat: 50%;
+
 
 * {
   all: unset;
 }
 
 .bar {
-  margin-top: 10px;
+  margin-top: 15px;
   color: $text;
   font-size: 20px;
-  font-family: "Symbols Nerd Font", "Comic Code Ligatures";
+  font-family: "Symbols Nerd Font Mono", "Comic Code Ligatures";
   margin-left: 15px;
   margin-right: 15px;
 }
 
+.bar-right, .bar-left, .bar-center {
+    background-color: rgba($bg, 0.8);
+    border-radius: 20px;
+}
+
 .mod {
-  padding-left: 10px;
-  padding-right: 10px;
+  margin: 5px 10px;
 }
 
 .metric scale trough highlight {
@@ -48,83 +57,91 @@ $hover-bg: $black;
   margin-left: 10px;
 }
 
-.workspaces button:hover {
-  background-color: $hover-bg;
-}
-
 .workspaces {
   // un... un bro momento
-  .id1 {
-    font-size: 15px;
-  }
-  .id2 {
-    font-size: 16px;
-  }
-  .id3 {
-    font-size: 15px;
-  }
-  .id6 {
-    font-size: 13px;
-  }
-  .id7 {
-    font-size: 14px;
-  }
-  .id8 {
-    font-size: 15px;
-  }
-
   button {
-    padding: 0 7px;
-    margin: 0 3px;
-    border-radius: 50%;
-    color: $text;
-    border: 2px solid;
-    border-color: $black2;
+    padding: 0 10px;
+    color: $black3;
+  }
+  button:hover {
+    color: $black
   }
   button.focused {
-    border-color: $magenta3;
-    color: $purple;
+    color: $magenta;
   }
   button.urgent {
-    background-color: $magenta;
-    color: $black;
+    color: $yellow;
   }
+}
+
+.sep {
+    font-size: 10px;
+    color: $black2;
 }
 
 .circle {
-  font-size: 14px;
+  font-size: 6px;
   margin: 8px;
+}
+
+.circle-progress {
+  border-radius: 20px;
+}
+
+.circle-bar {
+  background-color: $trough;
+  margin-left: 5px;
 }
 
 .red {
   color: $red;
 }
 
+.red.bg {
+  background-color: desaturate(darken($red, $bg-darken), $bg-desat);
+}
+
 .green {
   color: $green;
+}
+
+.green.bg {
+  background-color: desaturate(darken($green, $bg-darken), $bg-desat);
 }
 
 .yellow {
   color: $yellow;
 }
 
+.yellow.bg {
+  background-color: desaturate(darken($yellow, $bg-darken), $bg-desat);
+}
+
 .blue {
   color: $blue;
+}
+
+.blue.bg {
+  background-color: desaturate(darken($blue, $bg-darken), $bg-desat);
 }
 
 .magenta {
   color: $magenta;
 }
 
+.magenta.bg {
+  background-color: desaturate(darken($magenta, $bg-darken), $bg-desat);
+}
+
 .cyan {
   color: $cyan;
 }
 
-.purple {
-  color: $purple;
+.cyan.bg {
+  background-color: desaturate(darken($cyan, $bg-darken), $bg-desat);
 }
 
-.circle-bar {
-  background-color: $bg;
+.purple {
+  color: $purple;
 }
 

@@ -1,5 +1,14 @@
 (include "bar/bar.yuck")
 
+(defwindow bar
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "30px"
+                      :anchor "top center")
+  (bar :monitor 0))
+
 (defwindow bar-eDP
   :monitor 0
   :exclusive true

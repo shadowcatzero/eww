@@ -50,13 +50,16 @@
   (box :class "text mod"
     poll))
 
-(defwidget circle [value ?icon class]
-  (box :class "mod"
-    (circular-progress :value value
-                       :width 30
-                       :class "circle-bar ${class}"
-                       :thickness 4
-                       :start-at 75
-      (label :text {icon ?: ""}
-             :class "circle ${class}"))))
+(defwidget circle [value icon class]
+  (box :class "mod circle-progress"
+    (label :text icon
+           :class "${class}")
+      (circular-progress :value value
+                         :width 25
+                         :class "circle-bar ${class} bg"
+                         :thickness 4
+                         :start-at 75)))
+
+(defwidget sep []
+  (label :text "" :class "sep"))
 

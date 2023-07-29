@@ -12,7 +12,7 @@
 
 (defwidget bar-left []
   (box :class "bar-left" :space-evenly false :halign "start"
-    (bat) (cpu) (temp) (mem) (disk)))
+    (bat) (sep) (cpu) (sep) (temp) (sep) (mem) (sep) (disk)))
 
 (defwidget bar-center [monitor]
   (box :class "bar-center" :space-evenly false
@@ -20,5 +20,5 @@
 
 (defwidget bar-right []
   (box :class "bar-right" :space-evenly false :halign "end"
-    (brightness) (vol) (net) (date) (time)))
+    (brightness) (vol) (net) (sep) (date) (time)))
 

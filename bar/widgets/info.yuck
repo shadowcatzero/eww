@@ -6,7 +6,7 @@
 (defwidget vol []
   (hover-metric :icon {vol < 33 ? "" : vol < 66 ? "" : "󰕾"}
                 :value vol
-                :class "green"
+                :class "purple"
                 :revealname "vol_reveal"
                 :reveal vol_reveal
                 :onchange "wpctl set-volume @DEFAULT_SINK@ {}% && eww update vol={}"))
@@ -15,7 +15,7 @@
 (defwidget brightness []
   (hover-metric :icon ""
                 :value bright
-                :class "yellow"
+                :class "magenta"
                 :revealname "bright_reveal"
                 :reveal bright_reveal
                 :onchange "light -S {}%"))
@@ -24,7 +24,7 @@
 (defwidget net []
   (hover-text :icon " "
               :value net
-              :class "cyan"
+              :class "blue"
               :revealname "net_reveal"
               :reveal net_reveal))
 

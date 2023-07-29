@@ -3,9 +3,9 @@
 ;; (deflisten wslist1
 ;;   "scripts/getwsss DP-")
 (deflisten wslist0
-  "scripts/getwss 0")
+  "scripts/wmws 0")
 (deflisten wslist1
-  "scripts/getwss 1")
+  "scripts/wmws 1")
 (defwidget workspaces [monitor]
   (box :class "workspaces"
     (for entry in {monitor == 0 ? wslist0 : wslist1}
