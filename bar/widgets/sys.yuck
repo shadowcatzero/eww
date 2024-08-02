@@ -15,8 +15,20 @@
 
 (defwidget disk []
   (circle :value "${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}"
-          :icon ""
+          :icon "󰋊"
           :class "red"))
+
+(defpoll gpu :interval "1s" "nvidia-smi --query-gpu=utilization.gpu --format=csv | awk 'NR==2' | cut -c 1,2 | xargs")
+(defwidget gpu []
+  (circle :value {gpu}
+          :icon "󱄄"
+          :class "yellow"))
+
+(defpoll gpu_mem :interval "1s" "nvidia-smi --query-gpu=utilization.memory --format=csv | awk 'NR==2' | cut -c 1,2 | xargs")
+(defwidget gpu_mem []
+  (circle :value {gpu_mem}
+          :icon "󰥶"
+          :class "green"))
 
 (defpoll bat_stat :interval "30s" "cat /")
 (defwidget bat []

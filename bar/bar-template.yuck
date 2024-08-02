@@ -12,7 +12,7 @@
 
 (defwidget bar-left []
   (box :class "bar-left" :space-evenly false :halign "start"
-    (bat) (sep) (cpu) (sep) (temp) (sep) (mem) (sep) (disk)))
+    (cpu) (sep) (temp) (sep) (mem) (sep) (disk)))
 
 (defwidget bar-center [monitor]
   (box :class "bar-center" :space-evenly false
