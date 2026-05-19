@@ -18,13 +18,13 @@
           :icon "󰋊"
           :class "red"))
 
-(defpoll gpu :interval "1s" "nvidia-smi --query-gpu=utilization.gpu --format=csv | awk 'NR==2' | cut -c 1,2 | xargs")
+(defpoll gpu :interval "1s" "gpu_usage")
 (defwidget gpu []
   (circle :value {gpu}
           :icon "󱄄"
           :class "yellow"))
 
-(defpoll gpu_mem :interval "1s" "nvidia-smi --query-gpu=utilization.memory --format=csv | awk 'NR==2' | cut -c 1,2 | xargs")
+(defpoll gpu_mem :interval "1s" "gpu_mem_usage")
 (defwidget gpu_mem []
   (circle :value {gpu_mem}
           :icon "󰥶"
